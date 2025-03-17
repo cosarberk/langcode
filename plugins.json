@@ -1,0 +1,83 @@
+{
+  "plugins": [
+    {
+      "name": "OpenAI",
+      "description": "",
+      "configs": {
+        "model": "gpt-3.5-turbo-instruct",
+        "temperature": 0.7,
+        "maxRetries": 2,
+        "apiKey": "OPENAI_API_KEY"
+      }
+    },
+    {
+      "name": "AlephAlpha",
+      "description": "LangChain.js supports AlephAlpha's Luminous family of models. ",
+      "configs": {
+        "aleph_alpha_api_key": "YOUR_ALEPH_ALPHA_API_KEY"
+      }
+    },
+    {
+      "name": "AI21",
+      "description": "You can get started with AI21Labs' Jurassic family of models, as well as see a full list of available foundational models, ",
+      "configs": {
+        "ai21ApiKey": "YOUR_AI21_API_KEY"
+      }
+    },
+    {
+      "name": "ArcjetRedact",
+      "description": "The Arcjet redact integration allows you to redact sensitive user information from your prompts before sending it to an LLM.",
+      "configs": {
+        "entities": [
+          "email",
+          "phone-number",
+          "ip-address",
+          "credit-card-number"
+        ],
+        "contextWindowSize": 3
+      }
+    },
+    {
+      "name": "ChatOpenAI",
+      "description": "OpenAI is an artificial intelligence (AI) research laboratory.",
+      "configs": {
+        "model": "gpt-4o",
+        "apiKey": "OPENAI_API_KEY",
+        "temperature": 0
+      }
+    },
+    {
+      "name": "OpenAIEmbeddings",
+      "description": "Embedding models create a vector representation of a piece of text.",
+      "configs": {
+        "model": "text-embedding-3-large",
+        "apiKey": "OPENAI_API_KEY",
+        "temperature": 0
+      }
+    },
+    {
+      "name": "PDFLoader",
+      "description": "This notebook provides a quick overview for getting started with PDFLoader document loaders. For detailed",
+      "configs": {}
+    },
+    {
+      "name": "DuckDuckGoSearch",
+      "description": "This notebook provides a quick overview for getting started with DuckDuckGoSearch. ",
+      "configs": {"maxResults": 1}
+    },
+
+    {
+      "name": "Mailler",
+      "description": "",
+      "configs": {
+        "host": "smtp.gmail.com",
+        "port": 587,
+        "secure": false,
+        "auth": {
+          "user": "user@mail.com",
+          "pass": "xxxxxxxxxxx"
+        }
+      }
+    }
+  ]
+}
