@@ -3,7 +3,7 @@
 import { Command } from "commander";
 import inquirer from "inquirer";
 import chalk from "chalk";
-import { langcode, plugins, getPlugins } from "../src";
+import { langcode, plugins, getPlugins } from "..";
 import fs from "fs";
 
 const program = new Command();

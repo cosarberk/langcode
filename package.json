@@ -4,14 +4,15 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "bin": {
-  "langcode": "./bin/cli.js"
-},
-"engines": {
-  "node": ">=18",
-  "typescript": ">=4.9"
-},
+    "langcode": "./dist/bin/cli.js"
+  },
+  "engines": {
+    "node": ">=18",
+    "typescript": ">=4.9"
+  },
   "scripts": {
-    "build":"rm -rf dist && tsc",
+    "postbuild": "chmod +x dist/bin/cli.js",
+    "build": "rm -rf dist && tsc && npm run postbuild",
     "test": "ts-node-dev src/test/index.ts"
   },
   "repository": {
@@ -44,7 +45,7 @@
     "@langchain/ollama": "^0.2.0",
     "@langchain/openai": "^0.5.0",
     "axios": "^1.8.4",
-    "chalk": "^5.4.1",
+    "chalk": "^4.1.2",
     "commander": "^13.1.0",
     "dotenv": "^16.4.7",
     "duck-duck-scrape": "^2.2.7",
