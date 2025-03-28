@@ -12,6 +12,13 @@ export default class DallePlugin implements Plugin<DalleInitConfig, DalleRunArgs
 
   private dalle: DallEAPIWrapper | null = null;
 
+  static exampleConfig = {
+    openAIApiKey: "sk-...",
+    modelName: "dall-e-3",
+    size: "1024x1024",
+    n:1
+  };
+
   async init(config: DalleInitConfig) {
     this.dalle = new DallEAPIWrapper({
       openAIApiKey: config.apiKey,

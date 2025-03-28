@@ -1,4 +1,7 @@
+import { plugins } from "../enums";
 import { DallePluginTypes } from "./DallePlugin";
+import { HttpPluginTypes } from "./HttpPlugin";
+import { MailerPluginTypes } from "./MailerPlugin";
 import { OpenAiPluginTypes } from "./OpenaiPlugin";
 
 export interface Plugin<InitConfig = Record<string, any>,RunArgs = Record<string, any>,RunReturn = any> {
@@ -14,8 +17,14 @@ export interface PluginDescriptions {
   configExample: Record<string, any>;
 }
 
+export interface PluginConfigs {
+  pluginName:plugins
+  config:{ [key: string]: any }
+}
 
 export interface PluginTypeMap {
   dalle: typeof DallePluginTypes;
   openai: typeof OpenAiPluginTypes;
+  http: typeof HttpPluginTypes
+  mailer: typeof MailerPluginTypes
 }

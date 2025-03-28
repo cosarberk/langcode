@@ -1,3 +1,4 @@
+import chalk from "chalk";
 import { plugins } from "../types/enums";
 import { Plugin, PluginDescriptions } from "../types/plugins/plugin";
 
@@ -23,6 +24,26 @@ export async function getPlugins(): Promise<PluginDescriptions[]> {
 
   return availablePlugins;
 }
+
+export async function printPlugins() {
+  const Allplugins:PluginDescriptions[] =await getPlugins()
+    Allplugins.forEach((p, index) => {
+      const border = chalk.gray("═".repeat(50));
+    
+      console.log("\n" + border);
+      console.log(chalk.bold.cyan(`🔌 Plugin: ${p.name}`));
+      console.log(chalk.gray("📄 Description:"), chalk.white(p.description));
+      console.log(chalk.gray("🧪 Example Config:"));
+      console.log(
+        JSON.stringify(p.configExample, null, 2)
+          .split("\n")
+          .map((line) => "  " + chalk.green(line))
+          .join("\n")
+      );
+      console.log(border);
+    });
+}
+
 
 function capitalize(str: string) {
   return str.charAt(0).toUpperCase() + str.slice(1);
