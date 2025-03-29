@@ -53,3 +53,5 @@ export default class MailerPlugin
     return `📬 Email sent: ${info.messageId}`;
   }
 }
+
+
