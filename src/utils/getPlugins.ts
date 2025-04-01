@@ -10,11 +10,12 @@ export async function getPlugins(): Promise<PluginDescriptions[]> {
     try {
       const pluginModule = await import(`../plugins/${pluginName}/${capitalize(pluginName)}Plugin`);
       const pluginInstance: Plugin = new pluginModule.default();
-      const configExample = pluginModule.default.exampleConfig || {};
+      const configExample = pluginInstance.configExample || {};
 
       availablePlugins.push({
         name: pluginInstance.name,
         description: pluginInstance.description,
+        type:pluginInstance.type,
         configExample
       });
     } catch (err) {

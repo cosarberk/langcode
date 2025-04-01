@@ -9,6 +9,6 @@
     "strict": true,
     "declaration": true
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "src/bin/developer.js"],
   "exclude": ["node_modules"]
 }

@@ -2,27 +2,37 @@ import { DallEAPIWrapper } from "@langchain/openai";
 import fs from "fs/promises";
 import path from "path";
 import axios from "axios";
-import { DalleInitConfig, DalleRunArgs,Plugin } from "../../types";
+import { DalleExpose, DalleInitConfig, DalleRunArgs,Plugin, PluginType } from "../../types";
 
 
-export default class DallePlugin implements Plugin<DalleInitConfig, DalleRunArgs, string>
+export default class DallePlugin implements Plugin<DalleInitConfig, DalleRunArgs,DalleExpose, string>
 {
   name = "dalle";
   description = "OpenAI DALL·E API ile görsel üretir.";
+type=PluginType.Tool;
+  private dalle: DalleExpose["dalle"] | null = null;
 
-  private dalle: DallEAPIWrapper | null = null;
-
-  static exampleConfig = {
+  configExample:DalleInitConfig = {
     openAIApiKey: "sk-...",
     modelName: "dall-e-3",
     size: "1024x1024",
     n:1
   };
 
+  expose():DalleExpose {
+    return {
+      name:this.name,
+      description:this.description,
+      type:this.type,
+      configExample:this.configExample,
+      dalle:this.dalle
+    } 
+  }
+
   async init(config: DalleInitConfig) {
     this.dalle = new DallEAPIWrapper({
-      openAIApiKey: config.apiKey,
-      modelName: config.model || "dall-e-3",
+      openAIApiKey: config.openAIApiKey,
+      modelName: config.modelName || "dall-e-3",
       size: config.size || "1024x1024",
       n: config.n || 1,
     });

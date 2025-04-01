@@ -1,4 +1,14 @@
-import { plugins } from "../enums";
+import { DuckduckgoPluginPluginTypes } from "./duckduckgoPluginPlugin";
+import { SerpAPIToolPluginTypes } from "./serpAPIToolPlugin";
+import { RequestsPostToolPluginTypes } from "./requestsPostToolPlugin";
+import { RequestsGetToolPluginTypes } from "./requestsGetToolPlugin";
+import { CalculatorToolPluginTypes } from "./calculatorToolPlugin";
+import { DirectoryLoaderPluginTypes } from "./directoryLoaderPlugin";
+import { CsvLoaderPluginTypes } from "./csvLoaderPlugin";
+import { PdfLoaderPluginTypes } from "./pdfLoaderPlugin";
+import { TextLoaderPluginTypes } from "./textLoaderPlugin";
+import { BufferMemoryPluginTypes } from "./bufferMemoryPlugin";
+import { plugins, PluginType } from "../enums";
 import { AgentOpenAIPluginTypes } from "./AgentOpenAIPlugin";
 import { DallePluginTypes } from "./DallePlugin";
 import { HttpPluginTypes } from "./HttpPlugin";
@@ -7,18 +17,26 @@ import { OpenAIEmbeddingPluginTypes } from "./OpenAIEmbeddingPlugin";
 import { OpenAiPluginTypes } from "./OpenaiPlugin";
 import { OpenAIVectorSearchPluginTypes } from "./OpenAIVectorSearchPlugin";
 import { PromptTemplatePluginTypes } from "./PromptTemplatePlugin";
+import { StructuredOutputParserPluginTypes } from "./StructuredOutputParserPlugin";
+import { VectorSearchPluginTypes } from "./VectorSearchPlugin";
 
-export interface Plugin<InitConfig = Record<string, any>,RunArgs = Record<string, any>,RunReturn = any> {
+export interface Plugin<InitConfig = Record<string, any>,RunArgs = Record<string, any>,Expose = Record<string, any>,RunReturn = any> {
   name: string;
   description: string;
-
+  configExample?: Record<string, any> | {};
+  type: PluginType;
   init(config: InitConfig): Promise<void>;
   run(args: RunArgs): Promise<RunReturn>;
+  expose(): Expose;
+  
 }
+
+
 export interface PluginDescriptions {
   name: string;
   description: string;
   configExample: Record<string, any>;
+  type: PluginType;
 }
 
 export interface PluginConfigs {
@@ -35,4 +53,16 @@ export interface PluginTypeMap {
   agentOpenAI: typeof AgentOpenAIPluginTypes
   openaiEmbedding:typeof OpenAIEmbeddingPluginTypes
   openaiVectorSearch:typeof OpenAIVectorSearchPluginTypes
+  vectorSearch:typeof VectorSearchPluginTypes
+  structuredOutputParser:typeof StructuredOutputParserPluginTypes
+  bufferMemory: typeof BufferMemoryPluginTypes;
+  textLoader: typeof TextLoaderPluginTypes;
+  pdfLoader: typeof PdfLoaderPluginTypes;
+  csvLoader: typeof CsvLoaderPluginTypes;
+  directoryLoader: typeof DirectoryLoaderPluginTypes;
+  calculatorTool: typeof CalculatorToolPluginTypes;
+  requestsGetTool: typeof RequestsGetToolPluginTypes;
+  requestsPostTool: typeof RequestsPostToolPluginTypes;
+  serpAPITool: typeof SerpAPIToolPluginTypes;
+  duckduckgoPlugin: typeof DuckduckgoPluginPluginTypes;
 }

@@ -22,7 +22,7 @@ export class Logger {
     const time = new Date().toISOString();
     let output = `[${time}] ${message}`;
     if (data) {
-      output += "\n" + JSON.stringify(data, null, 2);
+      output += "\n" + this.safeSerialize(data);
     }
 
     if (this.toConsole) {
@@ -33,4 +33,31 @@ export class Logger {
       fs.appendFileSync(this.filePath, output + "\n");
     }
   }
+
+
+  private safeSerialize(data: any): string {
+    try {
+      return JSON.stringify(data, this.replacer, 2);
+    } catch {
+      return "[Unserializable Data]";
+    }
+  }
+
+  private replacer(key: string, value: any) {
+    if (typeof value === "function") return "[Function]";
+  
+    if (typeof value === "object" && value !== null) {
+      const constructorName = value.constructor?.name;
+  
+      // Temel objelere dokunma
+      const allowed = ["Object", "Array", "Map", "Set"];
+      if (constructorName && !allowed.includes(constructorName)) {
+        return `[Instance of ${constructorName}]`;
+      }
+    }
+  
+    return value;
+  }
+
+
 }

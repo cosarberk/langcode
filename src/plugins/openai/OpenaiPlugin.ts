@@ -1,16 +1,27 @@
 import { ChatOpenAI } from "@langchain/openai";
 import { HumanMessage } from "@langchain/core/messages";
-import { OpenAiInitConfig, OpenAiRunArgs,Plugin } from "../../types";
+import { OpenAiExpose, OpenAiInitConfig, OpenAiRunArgs,Plugin, PluginType } from "../../types";
 
-export default class OpenAIPlugin implements Plugin<OpenAiInitConfig, OpenAiRunArgs ,String> {
+export default class OpenAIPlugin implements Plugin<OpenAiInitConfig, OpenAiRunArgs ,OpenAiExpose,String> {
   name = "openai";
   description = "OpenAI GPT modellerini kullanır.";
-  private llm: ChatOpenAI | null = null;
-  static exampleConfig = {
+  type=PluginType.LLM;
+  private llm:OpenAiExpose["llm"] = null;
+  configExample:OpenAiInitConfig = {
     apiKey: "sk-...",
     modelName: "gpt-4o",
     temperature: 0
   };
+
+  expose():OpenAiExpose {
+    return {
+      name:this.name,
+      description:this.description,
+      type:this.type,
+      configExample:this.configExample,
+      llm:this.llm
+    }
+  }
 
   async init(config:OpenAiInitConfig) {
     const { apiKey, modelName = "gpt-4o", temperature = 0 } = config;

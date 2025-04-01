@@ -1,48 +1,52 @@
-import { Plugin } from "../../types";
-import { OpenAIEmbeddings } from "@langchain/openai";
-import { FaissStore } from "@langchain/community/vectorstores/faiss";
+import {EmbeddingProviders,VectorStores, OpenAIVectorSearchExpose, OpenAIVectorSearchInitConfig, OpenAIVectorSearchRunArgs, Plugin, PluginType } from "../../types";
 import { Document } from "@langchain/core/documents";
+import {  retrieverBuilder } from "../../base";
+import VectorSearchPlugin from "../VectorSearch/VectorSearchPlugin";
 
 
-export type OpenAIVectorSearchInitConfig = {
-  apiKey: string;
-  model?: string;
-  indexPath: string;
-  k?: number;
-};
-
-export type OpenAIVectorSearchRunArgs = {
-  query: string;
-};
 
 export default class OpenAIVectorSearchPlugin
-  implements Plugin<OpenAIVectorSearchInitConfig, OpenAIVectorSearchRunArgs, Document[]>
+  implements Plugin<OpenAIVectorSearchInitConfig, OpenAIVectorSearchRunArgs,OpenAIVectorSearchExpose, Document[]>
 {
-  name = "openaiVectorSearch";
+  name = "openaivectorsearch";
   description = "Query a FAISS vector index using OpenAI embeddings.";
-
-  private retriever!: ReturnType<FaissStore["asRetriever"]>;
-
-  async init(config: OpenAIVectorSearchInitConfig) {
-    const embeddings = new OpenAIEmbeddings({
-      apiKey: config.apiKey,
-      model: config.model || "text-embedding-3-small",
-    });
-
-    const vectorstore = await FaissStore.load(config.indexPath, embeddings);
-    this.retriever = vectorstore.asRetriever({
-      k: config.k ?? 4,
-    });
-  }
-
-  async run(args: OpenAIVectorSearchRunArgs) {
-    return await this.retriever.invoke(args.query);
-  }
-
-  static exampleConfig: OpenAIVectorSearchInitConfig = {
+  type=PluginType.VectorSearch;
+  configExample: OpenAIVectorSearchInitConfig = {
     apiKey: "sk-...",
     model: "text-embedding-3-small",
     indexPath: "./data/faiss-index",
     k: 3,
   };
+  private retriever!:OpenAIVectorSearchExpose["retriever"]
+
+
+  expose():OpenAIVectorSearchExpose {
+    return {
+      name:this.name,
+      description:this.description,
+      type:this.type,
+      configExample:this.configExample,
+      retriever:this.retriever
+    }
+  }
+
+  async init(config: OpenAIVectorSearchInitConfig) {
+
+
+
+  const retriever =await retrieverBuilder({embedding:{provider:EmbeddingProviders.OpenAI,
+    apiKey:config.apiKey,
+    model:config.model || "text-embedding-3-small"
+  },store:{type:VectorStores.Faiss,indexPath:config.indexPath || "./data/faiss-index" },k:config.k ?? 4})
+
+  this.retriever=retriever
+   
+  }
+
+  async run(args: OpenAIVectorSearchRunArgs) {
+  const vectorSearchPlugin = new VectorSearchPlugin()
+    return await vectorSearchPlugin.run({retriever:this.retriever,query:args.query})
+  }
+
+
 }

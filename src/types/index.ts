@@ -1,4 +1,5 @@
 export * from "./enums"
+export * from "./retrievers/retrievers"
 export * from "./plugins/DallePlugin"
 export * from "./plugins/plugin"
 export * from "./plugins/OpenaiPlugin"
@@ -7,3 +8,17 @@ export * from "./plugins/MailerPlugin"
 export * from "./plugins/PromptTemplatePlugin"
 export * from "./plugins/AgentOpenAIPlugin"
 export * from "./plugins/OpenAIEmbeddingPlugin"
+export * from "./plugins/OpenAIVectorSearchPlugin"
+export * from "./plugins/VectorSearchPlugin"
+export * from "./plugins/StructuredOutputParserPlugin"
+
+export * from "./plugins/bufferMemoryPlugin";
+export * from "./plugins/textLoaderPlugin";
+export * from "./plugins/pdfLoaderPlugin";
+export * from "./plugins/csvLoaderPlugin";
+export * from "./plugins/directoryLoaderPlugin";
+export * from "./plugins/calculatorToolPlugin";
+export * from "./plugins/requestsGetToolPlugin";
+export * from "./plugins/requestsPostToolPlugin";
+export * from "./plugins/serpAPIToolPlugin";
+export * from "./plugins/duckduckgoPluginPlugin";

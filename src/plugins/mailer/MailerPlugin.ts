@@ -1,14 +1,15 @@
 import nodemailer, { Transporter } from "nodemailer";
-import { MailerInitConfig, MailerRunArgs,Plugin } from "../../types";
+import { MailerExpose, MailerInitConfig, MailerRunArgs,Plugin, PluginType } from "../../types";
 
 
 
 export default class MailerPlugin
-  implements Plugin<MailerInitConfig, MailerRunArgs, string>
+  implements Plugin<MailerInitConfig, MailerRunArgs,MailerExpose, string>
 {
   name = "mailer";
   description = "SMTP email sender using nodemailer.";
-  static exampleConfig = {
+  type=PluginType.LangCodeTool
+  configExample:MailerInitConfig = {
     host: "mail.domain.com",
     port: 587,
     secure: false,
@@ -17,8 +18,19 @@ export default class MailerPlugin
       pass: "password....",
     },
   };
-  private transporter: Transporter | null = null;
-  private fromEmail: string | null = null;
+  private transporter:MailerExpose["transporter"] = null;
+  private fromEmail: MailerExpose["fromEmail"] = null;
+
+  expose():MailerExpose {
+    return {
+      name:this.name,
+      description:this.description,
+      type:this.type,
+      configExample:this.configExample,
+      transporter:this.transporter,
+      fromEmail:this.fromEmail
+    }
+  }
 
   async init(config: MailerInitConfig) {
     this.transporter = nodemailer.createTransport({

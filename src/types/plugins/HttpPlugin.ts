@@ -1,4 +1,5 @@
-import { Method } from "axios";
+import { AxiosRequestConfig, AxiosResponse, Method } from "axios";
+import { PluginDescriptions } from "./plugin";
 
 export type HttpInitConfig = {}; // init gerekmiyor ama interface uyumu için boş bırakıyoruz
 
@@ -11,8 +12,13 @@ export type HttpRunArgs = {
   timeout?: number;
 };
 
+export interface HttpExpose extends PluginDescriptions{
+  response:AxiosResponse | null
+  config:AxiosRequestConfig | null
+}
 
   export const HttpPluginTypes = {
     runArgs: {} as HttpRunArgs,
     return: "" as string,
+    expose:{} as HttpExpose
   };

@@ -44,6 +44,15 @@ export class PluginRunner {
 
     return result;
   }
+
+  async getExpose<T extends keyof PluginTypeMap>( pluginName: T): Promise<PluginTypeMap[T]["expose"]> {
+    const plugin = this.activePlugins.get(pluginName);
+    if (!plugin) throw new Error(`Plugin '${pluginName}' aktif değil.`);
+    if (typeof plugin.expose === "function") {
+      return plugin.expose() as PluginTypeMap[T]["expose"];
+    }
+    throw new Error(`Plugin '${pluginName}' expose() sağlamıyor.`);
+  }
 }
 function capitalize(str: string) {
   return str.charAt(0).toUpperCase() + str.slice(1);

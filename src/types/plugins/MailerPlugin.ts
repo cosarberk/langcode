@@ -1,3 +1,6 @@
+import { Transporter } from "nodemailer";
+import { PluginDescriptions } from "./plugin";
+
 export type MailerInitConfig = {
   host: string;
   port: number;
@@ -19,8 +22,14 @@ export type MailerRunArgs = {
   }[];
 };
 
+export interface MailerExpose extends PluginDescriptions{
+  transporter: Transporter | null ,
+  fromEmail: string | null
+}
+
 
   export const MailerPluginTypes = {
     runArgs: {} as MailerRunArgs,
     return: "" as string,
+    expose:{} as MailerExpose
   };

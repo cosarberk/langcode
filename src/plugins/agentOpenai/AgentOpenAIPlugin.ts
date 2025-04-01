@@ -1,4 +1,4 @@
-import { AgentOpenAIInitConfig, AgentOpenAIRunArgs, Plugin } from "../../types";
+import { AgentOpenAIExpose, AgentOpenAIInitConfig, AgentOpenAIRunArgs, Plugin, PluginType } from "../../types";
 import { ChatPromptTemplate } from "@langchain/core/prompts";
 import { ChatOpenAI } from "@langchain/openai";
 import { createAgentExecutor } from "../../base";
@@ -6,13 +6,14 @@ import { createAgentExecutor } from "../../base";
 
 
 export default class AgentOpenAIPlugin
-  implements Plugin<AgentOpenAIInitConfig, AgentOpenAIRunArgs, string>
+  implements Plugin<AgentOpenAIInitConfig, AgentOpenAIRunArgs, AgentOpenAIExpose,string>
 {
 
 
   name = "agentOpenAI";
   description = "LangChain agent powered by OpenAI and tools";
-  static exampleConfig: AgentOpenAIInitConfig = {
+  type=PluginType.Agent;
+  configExample: AgentOpenAIInitConfig = {
     apiKey: "sk-xxx",
     model: "gpt-4o",
     temperature: 0.7,
@@ -23,7 +24,17 @@ export default class AgentOpenAIPlugin
       { role: "assistant", content: "{agent_scratchpad}" },
     ],
   };
-  private executor: Awaited<ReturnType<typeof createAgentExecutor>> | null = null;
+  private executor:AgentOpenAIExpose["executor"]  = null;
+
+  expose():AgentOpenAIExpose {
+    return {
+      name:this.name,
+      description:this.description,
+      type:this.type,
+      configExample:this.configExample,
+      executor: this.executor
+    }
+  }
 
   async init(config: AgentOpenAIInitConfig) {
     const llm = new ChatOpenAI({

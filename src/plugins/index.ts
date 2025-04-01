@@ -5,3 +5,16 @@ export * from "./mailer/MailerPlugin"
 export * from "./promptTemplate/PromptTemplatePlugin"
 export * from "./agentOpenai/AgentOpenAIPlugin"
 export * from "./openAIEmbedding/OpenAIEmbeddingPlugin"
+export * from "./openAIVectorSearch/OpenAIVectorSearchPlugin"
+export * from "./VectorSearch/VectorSearchPlugin"
+export * from "./structuredOutputParser/StructuredOutputParserPlugin"
+export * from "./bufferMemory/bufferMemoryPlugin";
+export * from "./textLoader/textLoaderPlugin";
+export * from "./pdfLoader/pdfLoaderPlugin";
+export * from "./csvLoader/csvLoaderPlugin";
+export * from "./directoryLoader/directoryLoaderPlugin";
+export * from "./calculatorTool/calculatorToolPlugin";
+export * from "./requestsGetTool/requestsGetToolPlugin";
+export * from "./requestsPostTool/requestsPostToolPlugin";
+export * from "./serpAPITool/serpAPIToolPlugin";
+export * from "./duckduckgoPlugin/duckduckgoPluginPlugin";
