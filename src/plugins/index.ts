@@ -18,3 +18,8 @@ export * from "./requestsGetTool/requestsGetToolPlugin";
 export * from "./requestsPostTool/requestsPostToolPlugin";
 export * from "./serpAPITool/serpAPIToolPlugin";
 export * from "./duckduckgoPlugin/duckduckgoPluginPlugin";
+export * from "./browserTool/browserToolPlugin";
+export * from "./cheerioScraper/cheerioScraperPlugin";
+export * from "./pdfParser/pdfParserPlugin";
+export * from "./speechToText/speechToTextPlugin";
+export * from "./textToSpeech/textToSpeechPlugin";

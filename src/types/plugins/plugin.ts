@@ -1,3 +1,8 @@
+import { TextToSpeechPluginTypes } from "./textToSpeechPlugin";
+import { SpeechToTextPluginTypes } from "./speechToTextPlugin";
+import { PdfParserPluginTypes } from "./pdfParserPlugin";
+import { CheerioScraperPluginTypes } from "./cheerioScraperPlugin";
+import { BrowserToolPluginTypes } from "./browserToolPlugin";
 import { DuckduckgoPluginPluginTypes } from "./duckduckgoPluginPlugin";
 import { SerpAPIToolPluginTypes } from "./serpAPIToolPlugin";
 import { RequestsPostToolPluginTypes } from "./requestsPostToolPlugin";
@@ -65,4 +70,9 @@ export interface PluginTypeMap {
   requestsPostTool: typeof RequestsPostToolPluginTypes;
   serpAPITool: typeof SerpAPIToolPluginTypes;
   duckduckgoPlugin: typeof DuckduckgoPluginPluginTypes;
+  browserTool: typeof BrowserToolPluginTypes;
+  cheerioScraper: typeof CheerioScraperPluginTypes;
+  pdfParser: typeof PdfParserPluginTypes;
+  speechToText: typeof SpeechToTextPluginTypes;
+  textToSpeech: typeof TextToSpeechPluginTypes;
 }

@@ -19,6 +19,11 @@ export enum plugins {
   requestsPostTool = "requestsPostTool",
   serpAPITool = "serpAPITool",
   duckduckgoPlugin = "duckduckgoPlugin",
+  browserTool = "browserTool",
+  cheerioScraper = "cheerioScraper",
+  pdfParser = "pdfParser",
+  speechToText = "speechToText",
+  textToSpeech = "textToSpeech",
 }
 
 

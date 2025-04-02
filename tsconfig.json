@@ -7,8 +7,9 @@
     "outDir": "./dist",
     "rootDir": "./src",
     "strict": true,
-    "declaration": true
+    "declaration": true,
+    "skipLibCheck": true 
   },
   "include": ["src/**/*.ts", "src/bin/developer.js"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules","src/bin"]
 }

@@ -98,6 +98,13 @@ async function main() {
   //   pluginName:plugins.duckduckgoPlugin,
   //   config:{}
   // }
+
+  {
+    pluginName: plugins.pdfParser,
+    config: {
+      parseMetaOnly: false, // init aşamasında metadata veya tam metin tercihi
+    },
+  },
   ];
 
 
@@ -243,6 +250,22 @@ async function main() {
 
 // const result = await manager.run(plugins.duckduckgoPlugin,{query:"mustang"})
 // console.log(result)
+
+
+
+
+const localResult = await manager.run(plugins.pdfParser, {
+  filePath: "./pdf.pdf",
+});
+console.log("Yerel dosya parse sonucu:", localResult);
+
+// const urlResult = await manager.run(plugins.pdfParser, {
+//   fileUrl: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+//   parseMetaOnly: true, // init’teki default’u geçersiz kılar
+// });
+// console.log("URL üzerinden parse sonucu (sadece metadata):", urlResult);
+
+
 
 }
 

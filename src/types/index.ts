@@ -22,3 +22,8 @@ export * from "./plugins/requestsGetToolPlugin";
 export * from "./plugins/requestsPostToolPlugin";
 export * from "./plugins/serpAPIToolPlugin";
 export * from "./plugins/duckduckgoPluginPlugin";
+export * from "./plugins/browserToolPlugin";
+export * from "./plugins/cheerioScraperPlugin";
+export * from "./plugins/pdfParserPlugin";
+export * from "./plugins/speechToTextPlugin";
+export * from "./plugins/textToSpeechPlugin";
