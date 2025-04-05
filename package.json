@@ -1,6 +1,6 @@
 {
   "name": "langcode",
-  "version": "1.0.12",
+  "version": "1.0.14",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "bin": {
@@ -59,7 +59,8 @@
     "langchain": "^0.3.19",
     "nodemailer": "^6.10.0",
     "pdf-parse": "^1.1.1",
-    "puppeteer": "^24.5.0"
+    "puppeteer": "^24.5.0",
+    "pyodide": "^0.26.4"
   },
   "devDependencies": {
     "@types/express": "^5.0.1",

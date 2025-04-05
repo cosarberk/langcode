@@ -23,3 +23,6 @@ export * from "./cheerioScraper/cheerioScraperPlugin";
 export * from "./pdfParser/pdfParserPlugin";
 export * from "./speechToText/speechToTextPlugin";
 export * from "./textToSpeech/textToSpeechPlugin";
+export * from "./pythonExecutor/pythonExecutorPlugin";
+export * from "./terminal/terminalPlugin";
+export * from "./docker/dockerPlugin";

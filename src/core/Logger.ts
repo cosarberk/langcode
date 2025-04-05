@@ -1,20 +1,26 @@
 import fs from "fs";
 import path from "path";
 
+
+export interface LoggerArgs{
+   debug?: boolean;
+   filePath?: string | null;
+}
+
 export class Logger {
   private toConsole: boolean;
   private filePath: string | null;
 
-  constructor(debug = false, filePath: string | null = null) {
-    this.toConsole = debug;
-    this.filePath = filePath;
+  constructor(loggerargs:LoggerArgs  | undefined) {
+    this.toConsole = loggerargs?.debug ?? false;
+    this.filePath = loggerargs?.filePath ?? "./debug/langcode.log";
 
-    if (filePath) {
-      const dir = path.dirname(filePath);
+    if (loggerargs?.filePath) {
+      const dir = path.dirname(loggerargs.filePath);
       if (!fs.existsSync(dir)) {
         fs.mkdirSync(dir, { recursive: true });
       }
-      fs.writeFileSync(filePath, "Langoce Log Başladı:\n", { flag: "w" });
+      fs.writeFileSync(loggerargs.filePath, "Langoce Log Başladı:\n", { flag: "w" });
     }
   }
 
@@ -61,3 +67,6 @@ export class Logger {
 
 
 }
+
+
+export const logger =(loggerargs?:LoggerArgs) => new Logger(loggerargs)

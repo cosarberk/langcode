@@ -24,6 +24,9 @@ export enum plugins {
   pdfParser = "pdfParser",
   speechToText = "speechToText",
   textToSpeech = "textToSpeech",
+  pythonExecutor = "pythonExecutor",
+  terminal = "terminal",
+  docker = "docker",
 }
 
 

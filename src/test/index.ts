@@ -6,7 +6,7 @@ import { Calculator } from "@langchain/community/tools/calculator";
 import { Document } from "@langchain/core/documents";
 import {  createFaissStore, loadFaissStore, retrieverBuilder, retrieverCreator, saveFaissStore, summaryMemoryBuilder } from "../base";
 
-
+const key ="sk-proj"
 async function main() {
 
   const Allplugins = await printPlugins();
@@ -15,7 +15,7 @@ async function main() {
     {
       pluginName: plugins.openai,
       config: {
-        apiKey:  "sk-proj...",
+        apiKey: key,
         modelName: "gpt-4o",
         temperature: 0.7,
       },
@@ -23,7 +23,7 @@ async function main() {
     // {
     //   pluginName: plugins.dalle,
     //   config: {
-    //     apiKey:  "sk-proj...",
+    //     apiKey:  key,
     //   },
     // },
     // {
@@ -72,13 +72,13 @@ async function main() {
 // {
 //   pluginName:plugins.openaiEmbedding,
 //   config:{
-//     apiKey:"sk-...."
+//     apiKey:key
 //   }
 // },
   // {
   //   pluginName:plugins.vectorSearch,
   //   config:{}
-  // }
+  // },
 
   // {
   //   pluginName:plugins.bufferMemory,
@@ -99,12 +99,22 @@ async function main() {
   //   config:{}
   // }
 
-  {
-    pluginName: plugins.pdfParser,
-    config: {
-      parseMetaOnly: false, // init aşamasında metadata veya tam metin tercihi
-    },
-  },
+  // {
+  //   pluginName: plugins.pdfParser,
+  //   config: {
+  //     parseMetaOnly: false, // init aşamasında metadata veya tam metin tercihi
+  //   },
+  // },
+
+  // {
+  //   pluginName:plugins.pythonExecutor,
+  //   config:{}
+  // },
+  // {
+  //   pluginName:plugins.terminal,
+  //   config:{}
+  // }
+  {pluginName:plugins.docker,config:{}}
   ];
 
 
@@ -157,13 +167,15 @@ async function main() {
   //   "CREATE TABLE users (id INT, name TEXT);",
   //   "CREATE TABLE orders (id INT, user_id INT, total DECIMAL);",
   //   "SELECT * FROM users WHERE id = 1;",
+  //   "SELECT * FROM orders;",
+
   // ];
   // const documents = rawTexts.map((text) => new Document({ pageContent: text }));
-  // const embeddedVectors = await Promise.all(
-  //   rawTexts.map((text) =>
-  //     manager.run(plugins.openaiEmbedding, {text:text})
-  //   )
-  // );
+  // // const embeddedVectors = await Promise.all(
+  // //   rawTexts.map((text) =>
+  // //     manager.run(plugins.openaiEmbedding, {text:text})
+  // //   )
+  // // );
   
 
   // const OpenAIEmbedding:OpenAIEmbeddingExpose = await manager.getExpose(plugins.openaiEmbedding)
@@ -254,16 +266,42 @@ async function main() {
 
 
 
-const localResult = await manager.run(plugins.pdfParser, {
-  filePath: "./pdf.pdf",
-});
-console.log("Yerel dosya parse sonucu:", localResult);
+// const localResult = await manager.run(plugins.pdfParser, {
+//   filePath: "./pdf.pdf",
+// });
+// console.log("Yerel dosya parse sonucu:", localResult);
 
 // const urlResult = await manager.run(plugins.pdfParser, {
 //   fileUrl: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
 //   parseMetaOnly: true, // init’teki default’u geçersiz kılar
 // });
 // console.log("URL üzerinden parse sonucu (sadece metadata):", urlResult);
+
+
+
+// const code= `
+// import numpy as np
+// import pure_eval
+
+// print(np.mean([1, 2, 3]))
+// print(pure_eval.__version__)
+// `
+// const pysxec = manager.run(plugins.pythonExecutor,{code:code,packages: ["numpy"],micropipPackages: ["pure-eval"]})
+
+
+
+
+//const term = manager.run(plugins.terminal,{command:"ls -la"})
+
+//const docker = manager.run(plugins.docker,{command:"docker ps -a"})
+// const docker = await manager.getExpose(plugins.docker)
+// await docker.dfc.dockerInfo()
+
+
+
+
+
+
 
 
 

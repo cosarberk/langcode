@@ -42,7 +42,6 @@ export default class CheerioScraperPlugin
     try {
       const response = await axios.get(url, {
         headers: {
-          // init aşamasında tanımladığımız userAgent bilgisini kullanıyoruz
           "User-Agent": this.userAgent || "CheerioBot",
         },
       });

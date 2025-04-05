@@ -1,3 +1,6 @@
+import { DockerPluginTypes } from "./dockerPlugin";
+import { TerminalPluginTypes } from "./terminalPlugin";
+import { PythonExecutorPluginTypes } from "./pythonExecutorPlugin";
 import { TextToSpeechPluginTypes } from "./textToSpeechPlugin";
 import { SpeechToTextPluginTypes } from "./speechToTextPlugin";
 import { PdfParserPluginTypes } from "./pdfParserPlugin";
@@ -24,7 +27,7 @@ import { OpenAIVectorSearchPluginTypes } from "./OpenAIVectorSearchPlugin";
 import { PromptTemplatePluginTypes } from "./PromptTemplatePlugin";
 import { StructuredOutputParserPluginTypes } from "./StructuredOutputParserPlugin";
 import { VectorSearchPluginTypes } from "./VectorSearchPlugin";
-
+import "../global";
 export interface Plugin<InitConfig = Record<string, any>,RunArgs = Record<string, any>,Expose = Record<string, any>,RunReturn = any> {
   name: string;
   description: string;
@@ -75,4 +78,7 @@ export interface PluginTypeMap {
   pdfParser: typeof PdfParserPluginTypes;
   speechToText: typeof SpeechToTextPluginTypes;
   textToSpeech: typeof TextToSpeechPluginTypes;
+  pythonExecutor: typeof PythonExecutorPluginTypes;
+  terminal: typeof TerminalPluginTypes;
+  docker: typeof DockerPluginTypes;
 }

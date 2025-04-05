@@ -1,16 +1,17 @@
 import { ConversationSummaryMemory } from "langchain/memory";
-import { Logger } from "../../core/Logger";
+import { LoggerArgs, logger } from "../../core";
 import { BaseChatModel } from "@langchain/core/language_models/chat_models";
 
 type SummaryMemoryBuilderConfig = {
   llm: BaseChatModel;
   memoryKey?: string;
+  log:LoggerArgs
 };
 
 export async function summaryMemoryBuilder(config: SummaryMemoryBuilderConfig) {
-  const logger = new Logger(); // debug ve logfile yok, SENİN SİSTEMİNE UYGUN
+  const _logger = logger(config.log)
 
-  logger.log("🧠 SummaryMemory başlatılıyor...", {
+  _logger.log("🧠 SummaryMemory başlatılıyor...", {
     memoryKey: config.memoryKey,
     llm: `[Instance of ${config.llm.constructor.name}]`,
   });
@@ -20,6 +21,6 @@ export async function summaryMemoryBuilder(config: SummaryMemoryBuilderConfig) {
     memoryKey: config.memoryKey || "summary_chat",
   });
 
-  logger.log("✅ SummaryMemory hazır.");
+  _logger.log("✅ SummaryMemory hazır.");
   return memory;
 }

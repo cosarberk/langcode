@@ -1,13 +1,13 @@
 
 import { Plugin,plugins, PluginTypeMap } from "../types";
-import { Logger } from "./Logger";
+import { Logger ,LoggerArgs} from "./Logger";
 
 export class PluginRunner {
   private activePlugins = new Map<string, Plugin>();
   private logger: Logger;
 
   constructor(debug = false, logFile: string | null = null) {
-    this.logger = new Logger(debug, logFile);
+    this.logger = new Logger({debug:debug,filePath:logFile});
   }
 
   async initialize(configList: { pluginName: plugins; config: Record<string, any> }[]) {
