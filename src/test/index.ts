@@ -1,12 +1,13 @@
-import { langcode } from "../core";
+import { Langcode } from "../core";
 import { EmbeddingProviders, OpenAIEmbeddingExpose, PluginConfigs, plugins, VectorStores } from "../types";
 import { getPlugins, printPlugins } from "../utils";
 import chalk from "chalk";
 import { Calculator } from "@langchain/community/tools/calculator";
 import { Document } from "@langchain/core/documents";
-import {  createFaissStore, loadFaissStore, retrieverBuilder, retrieverCreator, saveFaissStore, summaryMemoryBuilder } from "../base";
+import {  createFaissStore, database, loadFaissStore, retrieverBuilder, retrieverCreator, saveFaissStore, summaryMemoryBuilder } from "../base";
 
-const key ="sk-proj"
+
+const key ="sk-proj-"
 async function main() {
 
   const Allplugins = await printPlugins();
@@ -118,7 +119,7 @@ async function main() {
   ];
 
 
-  const manager = await langcode(config, {
+  const manager = new Langcode(config, {
      debug: true,
    //  logFile: "./debug/langoce.log"
   });
@@ -298,6 +299,25 @@ async function main() {
 // await docker.dfc.dockerInfo()
 
 
+
+const db_source = await database.createDataSource({type:"mysql",host:"dburl",username:"dbuser",password:"dbpass",database:"dbname"})
+
+const db = await database.db.fromDataSourceParams({appDataSource:db_source})
+const openai = await manager.getExpose(plugins.openai)
+if (openai.llm) {
+  const chain =await database.createSqlChain({
+    llm:openai.llm,
+    db,
+    dialect:"mysql"})
+
+    const response = await chain.invoke({
+      question: "son 5 siparişi listele",
+    });
+
+    console.log(response)
+  
+  }
+  
 
 
 
