@@ -30,3 +30,6 @@ export * from "./plugins/textToSpeechPlugin";
 export * from "./plugins/pythonExecutorPlugin";
 export * from "./plugins/terminalPlugin";
 export * from "./plugins/dockerPlugin";
+
+
+export * from "./logger"

@@ -23,35 +23,35 @@ export type FaissLoadConfig = {
 
 export async function createFaissStore(config: FaissCreateConfig): Promise<FaissStore> {
   try {
-    config.logger?.log("📦 FAISS store oluşturuluyor...");
+    config.logger?.info("📦 FAISS store oluşturuluyor...");
     const store = await FaissStore.fromDocuments(config.documents, config.embeddings);
-    config.logger?.log("✅ FAISS store oluşturuldu.");
+    config.logger?.success("✅ FAISS store oluşturuldu.");
     return store;
   } catch (err) {
-    config.logger?.log("❌ FAISS store oluşturulurken hata:", err);
+    config.logger?.error("❌ FAISS store oluşturulurken hata:", err);
     throw err;
   }
 }
 
 export async function saveFaissStore(config: FaissSaveConfig): Promise<void> {
   try {
-    config.logger?.log(`💾 FAISS store '${config.path}' konumuna kaydediliyor...`);
+    config.logger?.info(`💾 FAISS store '${config.path}' konumuna kaydediliyor...`);
     await config.store.save(config.path);
-    config.logger?.log("✅ FAISS store başarıyla kaydedildi.");
+    config.logger?.success("✅ FAISS store başarıyla kaydedildi.");
   } catch (err) {
-    config.logger?.log("❌ FAISS store kaydederken hata:", err);
+    config.logger?.error("❌ FAISS store kaydederken hata:", err);
     throw err;
   }
 }
 
 export async function loadFaissStore(config: FaissLoadConfig): Promise<FaissStore> {
   try {
-    config.logger?.log(`📂 FAISS store '${config.path}' konumundan yükleniyor...`);
+    config.logger?.info(`📂 FAISS store '${config.path}' konumundan yükleniyor...`);
     const store = await FaissStore.load(config.path, config.embeddings);
-    config.logger?.log("✅ FAISS store başarıyla yüklendi.");
+    config.logger?.success("✅ FAISS store başarıyla yüklendi.");
     return store;
   } catch (err) {
-    config.logger?.log("❌ FAISS store yüklenirken hata:", err);
+    config.logger?.error("❌ FAISS store yüklenirken hata:", err);
     throw err;
   }
 }

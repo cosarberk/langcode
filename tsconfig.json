@@ -10,6 +10,6 @@
     "declaration": true,
     "skipLibCheck": true 
   },
-  "include": ["src/**/*.ts", "src/bin/developer.js"],
-  "exclude": ["node_modules","src/bin"]
+  "include": ["src/**/*.ts", "src/bin/developer.js","src/bin/cli.js"],
+  "exclude": ["node_modules","src/bin/plugin-template"]
 }

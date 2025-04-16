@@ -1,4 +1,4 @@
-import { Langcode } from "../core";
+import { langcode, Langcode } from "../core";
 import { EmbeddingProviders, OpenAIEmbeddingExpose, PluginConfigs, plugins, VectorStores } from "../types";
 import { getPlugins, printPlugins } from "../utils";
 import chalk from "chalk";
@@ -10,8 +10,7 @@ import {  createFaissStore, database, loadFaissStore, retrieverBuilder, retrieve
 const key ="sk-proj-"
 async function main() {
 
-  const Allplugins = await printPlugins();
-    console.log(Allplugins)
+  //const Allplugins = await printPlugins();
   const config:PluginConfigs[] = [
     {
       pluginName: plugins.openai,
@@ -119,10 +118,17 @@ async function main() {
   ];
 
 
-  const manager = new Langcode(config, {
-     debug: true,
-   //  logFile: "./debug/langoce.log"
-  });
+  // const manager = new Langcode(config, {
+  //    debug: true,
+  //  //  logFile: "./debug/langoce.log"
+  // });
+
+  const manager = await langcode(config, {
+    debug: false,strict:false
+  //  logFile: "./debug/langoce.log"
+ });
+// console.log(manager.history())
+
 
   // const response = await manager.run(plugins.openai, {
   //   prompt: "Selam, bana fıkra anlatır mısın?",
@@ -300,23 +306,23 @@ async function main() {
 
 
 
-const db_source = await database.createDataSource({type:"mysql",host:"dburl",username:"dbuser",password:"dbpass",database:"dbname"})
+// const db_source = await database.createDataSource({type:"mysql",host:"dburl",username:"dbuser",password:"dbpass",database:"dbname"})
 
-const db = await database.db.fromDataSourceParams({appDataSource:db_source})
-const openai = await manager.getExpose(plugins.openai)
-if (openai.llm) {
-  const chain =await database.createSqlChain({
-    llm:openai.llm,
-    db,
-    dialect:"mysql"})
+// const db = await database.db.fromDataSourceParams({appDataSource:db_source})
+// const openai = await manager.getExpose(plugins.openai)
+// if (openai.llm) {
+//   const chain =await database.createSqlChain({
+//     llm:openai.llm,
+//     db,
+//     dialect:"mysql"})
 
-    const response = await chain.invoke({
-      question: "son 5 siparişi listele",
-    });
+//     const response = await chain.invoke({
+//       question: "son 5 siparişi listele",
+//     });
 
-    console.log(response)
+//     console.log(response)
   
-  }
+//   }
   
 
 
@@ -327,4 +333,4 @@ if (openai.llm) {
 
 }
 
-main().catch(console.error);
+main()
