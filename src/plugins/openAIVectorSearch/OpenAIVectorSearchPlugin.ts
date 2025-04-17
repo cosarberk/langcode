@@ -11,7 +11,10 @@ export default class OpenAIVectorSearchPlugin
   name = "openaivectorsearch";
   description = "Query a FAISS vector index using OpenAI embeddings.";
   type=PluginType.VectorSearch;
-  configExample: OpenAIVectorSearchInitConfig = {
+  RunConfigExample:OpenAIVectorSearchRunArgs={
+    query: ""
+  }
+  InitConfigExample: OpenAIVectorSearchInitConfig = {
     apiKey: "sk-...",
     model: "text-embedding-3-small",
     indexPath: "./data/faiss-index",
@@ -25,7 +28,8 @@ export default class OpenAIVectorSearchPlugin
       name:this.name,
       description:this.description,
       type:this.type,
-      configExample:this.configExample,
+      InitConfigExample:this.InitConfigExample,
+      RunConfigExample:this.RunConfigExample,
       retriever:this.retriever
     }
   }

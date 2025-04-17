@@ -7,7 +7,10 @@ export default class {{PluginName}}Plugin
   description = "{{PluginName}} açıklaması...";
   type = PluginType.Tool;
 
-  configExample: {{PluginName}}InitConfig = {
+  InitConfigExample: {{PluginName}}InitConfig = {
+    // config örneği
+  };
+  RunConfigExample: {{PluginName}}RunArgs = {
     // config örneği
   };
 
@@ -18,7 +21,8 @@ export default class {{PluginName}}Plugin
       name: this.name,
       description: this.description,
       type: this.type,
-      configExample: this.configExample,
+      InitConfigExample: this.InitConfigExample,
+      RunConfigExample:this.RunConfigExample,
       tool: this.tool,
     };
   }

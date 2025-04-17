@@ -7,14 +7,20 @@ export default class PromptTemplatePlugin
   name = "prompttemplate";
   description = "LangChain PromptTemplate formatter";
   type=PluginType.Prompt;
-  configExample:PromptTemplateInitConfig={} 
+  RunConfigExample:PromptTemplateRunArgs={
+    template: "",
+    inputVariables: {}
+  }
+  InitConfigExample:PromptTemplateInitConfig={} 
 
   expose(): PromptTemplateExpose {
     return {
       name:this.name,
       description:this.description,
       type:this.type,
-      configExample:this.configExample
+      InitConfigExample:this.InitConfigExample,
+      RunConfigExample:this.RunConfigExample,
+
     }
   }
 

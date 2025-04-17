@@ -7,8 +7,8 @@ export default class TextLoaderPlugin
   name = "textLoader";
   description = "Loads plain text files from the file system.";
   type = PluginType.Loader;
-
-  configExample: TextLoaderInitConfig = {
+  RunConfigExample:TextLoaderRunArgs={}
+  InitConfigExample: TextLoaderInitConfig = {
     path: "./example.txt",
   };
 
@@ -19,7 +19,8 @@ export default class TextLoaderPlugin
       name: this.name,
       description: this.description,
       type: this.type,
-      configExample: this.configExample,
+      InitConfigExample: this.InitConfigExample,
+      RunConfigExample:this.RunConfigExample,
       loader: this.loader,
     };
   }

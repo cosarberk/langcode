@@ -77,18 +77,34 @@ export class Logger extends EventEmitter {
   /**
    * Renkli konsol çıktısı için chalk
    */
+  // private colorize(level: LogLevel, text: string): string {
+  //   switch (level) {
+  //     case "info":
+  //       return chalk.blue(text);
+  //     case "warn":
+  //       return chalk.yellow(text);
+  //     case "error":
+  //       return chalk.red(text);
+  //     case "success":
+  //       return chalk.green(text);
+  //     case "debug":
+  //       return chalk.cyan(text);
+  //     default:
+  //       return text;
+  //   }
+  // }
   private colorize(level: LogLevel, text: string): string {
     switch (level) {
       case "info":
-        return chalk.blue(text);
+        return chalk.hex("#0099ff")(text);     // özel mavi
       case "warn":
-        return chalk.yellow(text);
+        return chalk.hex("#ffff00")(text);     // sarı
       case "error":
-        return chalk.red(text);
+        return chalk.hex("#ff0000")(text);     // gerçek kırmızı
       case "success":
-        return chalk.green(text);
+        return chalk.hex("#00cc00")(text);     // yeşil
       case "debug":
-        return chalk.cyan(text);
+        return chalk.hex("#aaaaaa")(text);     // gri
       default:
         return text;
     }

@@ -10,8 +10,11 @@ export default class StructuredOutputParserPlugin
   name = "structuredOutputParser";
   description = "Parses structured JSON-like LLM outputs using a Zod schema.";
   type=PluginType.Parser;
+  RunConfigExample:StructuredOutputParserRunArgs={
+    text: ""
+  }
   private parser!:StructuredOutputParserExpose["parser"];
- configExample:StructuredOutputParserInitConfig = {
+ InitConfigExample:StructuredOutputParserInitConfig = {
     schema: z.object({
       name: z.string(),
       age: z.number(),
@@ -22,7 +25,8 @@ export default class StructuredOutputParserPlugin
       name: this.name,
       description: this.description,
       type:this.type,
-      configExample:this.configExample,
+      InitConfigExample:this.InitConfigExample,
+      RunConfigExample:this.RunConfigExample,
       parser:this.parser
     };
   }

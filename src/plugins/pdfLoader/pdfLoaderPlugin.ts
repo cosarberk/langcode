@@ -7,8 +7,10 @@ export default class PdfLoaderPlugin
   name = "pdfLoader";
   description = "Loads text content from a PDF file.";
   type = PluginType.Loader;
+  RunConfigExample:PdfLoaderRunArgs={
 
-  configExample: PdfLoaderInitConfig = {
+  }
+  InitConfigExample: PdfLoaderInitConfig = {
     path: "./example.pdf",
   };
 
@@ -19,7 +21,8 @@ export default class PdfLoaderPlugin
       name: this.name,
       description: this.description,
       type: this.type,
-      configExample: this.configExample,
+      InitConfigExample: this.InitConfigExample,
+      RunConfigExample:this.RunConfigExample,
       loader: this.loader,
     };
   }

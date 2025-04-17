@@ -12,8 +12,12 @@ export default class DockerPlugin
   name = "docker";
   description = "Runs secure Docker commands like docker run, docker exec.";
   type = PluginType.LangCodeTool;
-
-  configExample: DockerInitConfig = {
+  RunConfigExample:DockerRunArgs={
+    command: "",
+    timeout:0,
+    env: {}
+  }
+  InitConfigExample: DockerInitConfig = {
     safeMode: true,
     defaultTimeout: 10000,
     workingDir: process.cwd()
@@ -74,7 +78,8 @@ export default class DockerPlugin
       name: this.name,
       description: this.description,
       type: this.type,
-      configExample: this.configExample,
+      InitConfigExample: this.InitConfigExample,
+      RunConfigExample:this.RunConfigExample,
       safeMode: this.safeMode,
       defaultTimeout: this.defaultTimeout,
       workingDir: this.workingDir,

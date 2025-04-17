@@ -10,8 +10,10 @@ export default class DuckduckgoPluginPlugin
   name = "duckduckgoPlugin";
   description = "Search the web using DuckDuckGo search engine.";
   type = PluginType.Tool;
-
-  configExample: DuckduckgoPluginInitConfig = {
+  RunConfigExample:DuckduckgoPluginRunArgs={
+    query: ""
+  }
+  InitConfigExample: DuckduckgoPluginInitConfig = {
     maxResults: 3,
     searchOptions: {
       safeSearch: 0,
@@ -27,7 +29,8 @@ export default class DuckduckgoPluginPlugin
       name: this.name,
       description: this.description,
       type: this.type,
-      configExample: this.configExample,
+      InitConfigExample: this.InitConfigExample,
+      RunConfigExample:this.RunConfigExample,
       tool: this.tool,
     };
   }

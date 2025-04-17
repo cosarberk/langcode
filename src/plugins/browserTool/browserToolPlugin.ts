@@ -9,8 +9,14 @@ export default class BrowserToolPlugin
   name = "browserTool";
   description = "Web Browser plugin (headless) ile sayfa açma, etkileşime geçme ve veri çekme.";
   type = PluginType.Tool;
-
-  configExample: BrowserToolInitConfig = {
+  RunConfigExample:BrowserToolRunArgs={
+    url: "",
+    selector:"", 
+    action:"click",
+    input:"",
+    evaluate: ""
+  }
+  InitConfigExample: BrowserToolInitConfig = {
     headless: true,
     defaultViewport: { width: 1280, height: 720 },
   };
@@ -22,7 +28,8 @@ export default class BrowserToolPlugin
       name: this.name,
       description: this.description,
       type: this.type,
-      configExample: this.configExample,
+      InitConfigExample: this.InitConfigExample,
+      RunConfigExample:this.RunConfigExample,
       browser: this.browser,
     };
   }

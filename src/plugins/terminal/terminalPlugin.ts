@@ -12,8 +12,12 @@ export default class TerminalPlugin
   name = "terminal";
   description = "Executes terminal commands securely.";
   type = PluginType.LangCodeTool;
-
-  configExample: TerminalInitConfig = {
+  RunConfigExample:TerminalRunArgs={
+    command: "",
+    timeout:0,
+    env:{}
+  }
+  InitConfigExample: TerminalInitConfig = {
     safeMode: true,
     defaultTimeout: 5000,
     workingDir: process.cwd()
@@ -29,7 +33,8 @@ export default class TerminalPlugin
       name: this.name,
       description: this.description,
       type: this.type,
-      configExample: this.configExample,
+      InitConfigExample: this.InitConfigExample,
+      RunConfigExample:this.RunConfigExample,
       safeMode:this.safeMode,
       defaultTimeout:this.defaultTimeout,
       workingDir:this.workingDir,

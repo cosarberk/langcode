@@ -9,16 +9,21 @@ export default class VectorSearchPlugin
   name = "vectorSearch";
   description = "Generic vector search with dynamic retriever input.";
   type=PluginType.VectorSearch;
+  RunConfigExample={
+    query: "",
+    retriever: undefined
+  }
   private retriever!:VectorSearchExpose["retriever"];
 
-  configExample = {}; // init'e config verilmeyecek
+  InitConfigExample = {}; // init'e config verilmeyecek
 
   expose(): VectorSearchExpose {
     return {
       name: this.name,
       description: this.description,
       type:this.type,
-      configExample: this.configExample,
+      InitConfigExample: this.InitConfigExample,
+      RunConfigExample:this.RunConfigExample,
       retriever: this.retriever,
     };
   }

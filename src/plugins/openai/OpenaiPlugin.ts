@@ -7,7 +7,10 @@ export default class OpenAIPlugin implements Plugin<OpenAiInitConfig, OpenAiRunA
   description = "OpenAI GPT modellerini kullanır.";
   type=PluginType.LLM;
   private llm:OpenAiExpose["llm"] = null;
-  configExample:OpenAiInitConfig = {
+  RunConfigExample:OpenAiRunArgs={
+    prompt: ""
+  }
+  InitConfigExample:OpenAiInitConfig = {
     apiKey: "sk-...",
     modelName: "gpt-4o",
     temperature: 0
@@ -18,7 +21,8 @@ export default class OpenAIPlugin implements Plugin<OpenAiInitConfig, OpenAiRunA
       name:this.name,
       description:this.description,
       type:this.type,
-      configExample:this.configExample,
+      InitConfigExample:this.InitConfigExample,
+      RunConfigExample:this.RunConfigExample,
       llm:this.llm
     }
   }

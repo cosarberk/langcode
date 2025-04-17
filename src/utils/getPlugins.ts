@@ -10,13 +10,15 @@ export async function getPlugins(): Promise<PluginDescriptions[]> {
     try {
       const pluginModule = await import(`../plugins/${pluginName}/${capitalize(pluginName)}Plugin`);
       const pluginInstance: Plugin = new pluginModule.default();
-      const configExample = pluginInstance.configExample || {};
+      const InitConfigExample = pluginInstance.InitConfigExample || {};
+      const RunConfigExample = pluginInstance.RunConfigExample || {};
 
       availablePlugins.push({
         name: pluginInstance.name,
         description: pluginInstance.description,
         type:pluginInstance.type,
-        configExample
+        InitConfigExample,
+        RunConfigExample
       });
     } catch (err) {
       console.warn(`Plugin '${pluginName}' yüklenemedi:`, err);
@@ -24,6 +26,27 @@ export async function getPlugins(): Promise<PluginDescriptions[]> {
   }
 
   return availablePlugins;
+}
+
+export async function getPlugin(pluginName: plugins): Promise<PluginDescriptions | null> {
+  try {
+    const pluginModule = await import(`../plugins/${pluginName}/${capitalize(pluginName)}Plugin`);
+    const pluginInstance: Plugin = new pluginModule.default();
+    const InitConfigExample = pluginInstance.InitConfigExample || {};
+    const RunConfigExample = pluginInstance.RunConfigExample || {};
+
+
+    return {
+      name: pluginInstance.name,
+      description: pluginInstance.description,
+      type: pluginInstance.type,
+      InitConfigExample,
+      RunConfigExample
+    };
+  } catch (err) {
+    console.warn(`Plugin '${pluginName}' yüklenemedi:`, err);
+    return null;
+  }
 }
 
 export async function printPlugins() {
@@ -36,7 +59,7 @@ export async function printPlugins() {
       console.log(chalk.gray("📄 Description:"), chalk.white(p.description));
       console.log(chalk.gray("🧪 Example Config:"));
       console.log(
-        JSON.stringify(p.configExample, null, 2)
+        JSON.stringify(p.InitConfigExample, null, 2)
           .split("\n")
           .map((line) => "  " + chalk.green(line))
           .join("\n")

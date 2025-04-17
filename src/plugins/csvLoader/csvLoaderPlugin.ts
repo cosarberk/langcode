@@ -9,8 +9,10 @@ export default class CsvLoaderPlugin
   name = "csvLoader";
   description = "Loads content from a CSV file.";
   type = PluginType.Loader;
+  RunConfigExample:CsvLoaderRunArgs={
 
-  configExample: CsvLoaderInitConfig = {
+  }
+  InitConfigExample: CsvLoaderInitConfig = {
     path: "./example.csv",
   };
 
@@ -21,7 +23,8 @@ export default class CsvLoaderPlugin
       name: this.name,
       description: this.description,
       type: this.type,
-      configExample: this.configExample,
+      InitConfigExample: this.InitConfigExample,
+      RunConfigExample:this.RunConfigExample,
       loader: this.loader,
     };
   }

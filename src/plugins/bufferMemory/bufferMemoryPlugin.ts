@@ -18,8 +18,10 @@ export default class BufferMemoryPlugin
   name = "bufferMemory";
   description = "Stores chat messages in memory (non-persistent)";
   type = PluginType.Memory;
+  RunConfigExample:BufferMemoryRunArgs={
 
-  configExample: BufferMemoryInitConfig = {
+  }
+  InitConfigExample: BufferMemoryInitConfig = {
     memoryKey: "chat_history",
     aiPrefix: "AI",
     humanPrefix: "Human",
@@ -32,7 +34,8 @@ export default class BufferMemoryPlugin
       name: this.name,
       description: this.description,
       type: this.type,
-      configExample: this.configExample,
+      InitConfigExample: this.InitConfigExample,
+      RunConfigExample:this.RunConfigExample,
       memory: this.memory,
     };
   }

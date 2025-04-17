@@ -5,7 +5,15 @@ import { HttpExpose, HttpInitConfig, HttpRunArgs ,Plugin, PluginType} from "../.
 export default class HttpPlugin implements Plugin<HttpInitConfig, HttpRunArgs,HttpExpose, any> {
   name = "http";
   description = "Generic HTTP client using axios for API requests.";
-  configExample={}
+  InitConfigExample:HttpInitConfig={}
+  RunConfigExample:HttpRunArgs={
+    url: "",
+     method: "GET", 
+      headers:{},
+      params: {} , 
+      data: [],  
+      timeout: 0
+  }
   type=PluginType.LangCodeTool;
   private response:HttpExpose["response"] | null = null
   private config:HttpExpose["config"] | null = null
@@ -18,7 +26,8 @@ export default class HttpPlugin implements Plugin<HttpInitConfig, HttpRunArgs,Ht
    return { name:this.name,
     description:this.description,
     type:this.type,
-    configExample:this.configExample,
+    InitConfigExample:this.InitConfigExample,
+    RunConfigExample:this.RunConfigExample,
     response:this.response,
     config:this.config
    }

@@ -12,8 +12,11 @@ export default class SpeechToTextPlugin
   name = "speechToText";
   description = "Bir ses dosyasını OpenAI Whisper API kullanarak metne çeviren plugin.";
   type = PluginType.Tool;
-
-  configExample: SpeechToTextInitConfig = {
+  RunConfigExample:SpeechToTextRunArgs={
+    audioFilePath: "",
+    prompt:""
+  }
+  InitConfigExample: SpeechToTextInitConfig = {
     openAIApiKey: "sk-...",
     openAIModel: "whisper-1",
   };
@@ -26,7 +29,8 @@ export default class SpeechToTextPlugin
       name: this.name,
       description: this.description,
       type: this.type,
-      configExample: this.configExample,
+      InitConfigExample: this.InitConfigExample,
+      RunConfigExample:this.RunConfigExample,
       apiKey: this.apiKey,
       model:this.model
     };

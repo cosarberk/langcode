@@ -1,14 +1,14 @@
 export enum plugins {
-    openai = "openai",
-    dalle = "dalle",
-    http = "http",
-    mailer = "mailer",
-    promptTemplate="promptTemplate",
-    agentOpenAI = "agentOpenAI",
-    openaiEmbedding = "openaiEmbedding",
-    openaiVectorSearch ="openaiVectorSearch",
-    vectorSearch = "vectorSearch",
-    structuredOutputParser ="structuredOutputParser",
+  openai = "openai",
+  dalle = "dalle",
+  http = "http",
+  mailer = "mailer",
+  promptTemplate = "promptTemplate",
+  agentOpenAI = "agentOpenAI",
+  openaiEmbedding = "openaiEmbedding",
+  openaiVectorSearch = "openaiVectorSearch",
+  vectorSearch = "vectorSearch",
+  structuredOutputParser = "structuredOutputParser",
   bufferMemory = "bufferMemory",
   textLoader = "textLoader",
   pdfLoader = "pdfLoader",
@@ -29,8 +29,6 @@ export enum plugins {
   docker = "docker",
 }
 
-
-
 export enum PluginType {
   LLM = "llm",
   Embedding = "embedding",
@@ -44,5 +42,5 @@ export enum PluginType {
   Output = "output",
   Loader = "loader",
   Chain = "chain",
-  LangCodeTool = "langCodeTool"
+  LangCodeTool = "langCodeTool",
 }

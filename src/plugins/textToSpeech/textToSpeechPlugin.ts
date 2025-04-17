@@ -10,8 +10,12 @@ export default class TextToSpeechPlugin
   name = "textToSpeech";
   description = "Metni ElevenLabs üzerinden sese çeviren plugin.";
   type = PluginType.Tool;
-
-  configExample: TextToSpeechInitConfig = {
+  RunConfigExample:TextToSpeechRunArgs={
+    text: "",
+    outputFilePath:"",
+    voiceId:""
+  }
+  InitConfigExample: TextToSpeechInitConfig = {
     elevenLabsApiKey: "api-...",
     defaultVoiceId: "EXAVITQu4vr4xnSDxMaL",
   };
@@ -24,7 +28,8 @@ export default class TextToSpeechPlugin
       name: this.name,
       description: this.description,
       type: this.type,
-      configExample: this.configExample,
+      InitConfigExample: this.InitConfigExample,
+      RunConfigExample:this.RunConfigExample,
       apiKey: this.apiKey,
       defaultVoiceId: this.defaultVoiceId,
 

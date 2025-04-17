@@ -7,8 +7,11 @@ export default class RequestsPostToolPlugin
   name = "requestsPostTool";
   description = "Send HTTP POST requests to a given URL with a JSON body.";
   type = PluginType.Tool;
-
-  configExample: RequestsPostToolInitConfig = { };
+  RunConfigExample:RequestsPostToolRunArgs={
+    url: "",
+    data: {}
+  }
+  InitConfigExample: RequestsPostToolInitConfig = { };
 
   private tool: RequestsPostToolExpose["tool"] = null;
 
@@ -17,7 +20,8 @@ export default class RequestsPostToolPlugin
       name: this.name,
       description: this.description,
       type: this.type,
-      configExample: this.configExample,
+      InitConfigExample: this.InitConfigExample,
+      RunConfigExample:this.RunConfigExample,
       tool: this.tool,
     };
   }

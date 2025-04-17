@@ -8,8 +8,10 @@ export default class RequestsGetToolPlugin
   name = "requestsGetTool";
   description = "Send HTTP GET requests to any URL and retrieve text content.";
   type = PluginType.Tool;
-
-  configExample: RequestsGetToolInitConfig = {};
+  RunConfigExample:RequestsGetToolRunArgs={
+    url: ""
+  }
+  InitConfigExample: RequestsGetToolInitConfig = {};
 
   private tool: RequestsGetToolExpose["tool"] = null;
 
@@ -18,7 +20,8 @@ export default class RequestsGetToolPlugin
       name: this.name,
       description: this.description,
       type: this.type,
-      configExample: this.configExample,
+      InitConfigExample: this.InitConfigExample,
+      RunConfigExample:this.RunConfigExample,
       tool: this.tool,
     };
   }

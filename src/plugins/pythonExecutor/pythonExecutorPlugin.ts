@@ -1,20 +1,34 @@
 import { Plugin } from "../../types";
-import { PluginType, PythonExecutorInitConfig, PythonExecutorRunArgs, PythonExecutorExpose } from "../../types";
+import {
+  PluginType,
+  PythonExecutorInitConfig,
+  PythonExecutorRunArgs,
+  PythonExecutorExpose,
+} from "../../types";
 import { PythonInterpreterTool } from "@langchain/community/experimental/tools/pyinterpreter";
 import { loadPyodide, PyodideInterface } from "pyodide";
 
-
-
 export default class PythonExecutorPlugin
-  implements Plugin<PythonExecutorInitConfig, PythonExecutorRunArgs, PythonExecutorExpose, any> {
-  
+  implements
+    Plugin<
+      PythonExecutorInitConfig,
+      PythonExecutorRunArgs,
+      PythonExecutorExpose,
+      any
+    >
+{
   name = "pythonExecutor";
-  description = "Python kodlarını LangChain'in PythonInterpreterTool aracıyla çalıştıran plugin.";
+  description =
+    "Python kodlarını LangChain'in PythonInterpreterTool aracıyla çalıştıran plugin.";
   type = PluginType.Tool;
+  RunConfigExample: PythonExecutorRunArgs = {
+    code: "",
+    packages: [""],
+    micropipPackages: [""],
+  };
+  InitConfigExample: PythonExecutorInitConfig = {};
 
-  configExample: PythonExecutorInitConfig = {};
-
-  private pythonInterpreter:PythonExecutorExpose["pythonInterpreter"]= null;
+  private pythonInterpreter: PythonExecutorExpose["pythonInterpreter"] = null;
   private pyodideInstance: PythonExecutorExpose["pyodideInstance"] = null;
 
   expose(): PythonExecutorExpose {
@@ -22,23 +36,24 @@ export default class PythonExecutorPlugin
       name: this.name,
       description: this.description,
       type: this.type,
-      configExample: this.configExample,
-      pyodideInstance:this.pyodideInstance,
+      InitConfigExample: this.InitConfigExample,
+      RunConfigExample:this.RunConfigExample,
+      pyodideInstance: this.pyodideInstance,
       pythonInterpreter: this.pythonInterpreter,
     };
   }
 
   async init(config: PythonExecutorInitConfig) {
-  
-  const pyodideInstance: PyodideInterface = await loadPyodide();
-  this.pyodideInstance =pyodideInstance;
-  this.pythonInterpreter = new PythonInterpreterTool({ instance:pyodideInstance });
-
+    const pyodideInstance: PyodideInterface = await loadPyodide();
+    this.pyodideInstance = pyodideInstance;
+    this.pythonInterpreter = new PythonInterpreterTool({
+      instance: pyodideInstance,
+    });
   }
 
   async run(args: PythonExecutorRunArgs): Promise<any> {
- 
-    if (!this.pythonInterpreter) throw new Error("PythonExecutorPlugin başlatılmadı.");
+    if (!this.pythonInterpreter)
+      throw new Error("PythonExecutorPlugin başlatılmadı.");
 
     const { code, packages, micropipPackages } = args;
 
@@ -53,7 +68,8 @@ export default class PythonExecutorPlugin
       // micropip paketlerini yükle (PyPI'den saf python paketleri)
       if (micropipPackages?.length) {
         await this.pythonInterpreter.addPackage("micropip");
-        const micropip = this.pythonInterpreter.pyodideInstance.pyimport("micropip");
+        const micropip =
+          this.pythonInterpreter.pyodideInstance.pyimport("micropip");
         for (const pkg of micropipPackages) {
           await micropip.install(pkg);
         }
@@ -66,7 +82,4 @@ export default class PythonExecutorPlugin
       return { error: error.message || error };
     }
   }
-
-
-  
 }

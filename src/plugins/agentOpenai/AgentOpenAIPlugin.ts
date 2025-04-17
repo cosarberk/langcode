@@ -13,7 +13,10 @@ export default class AgentOpenAIPlugin
   name = "agentOpenAI";
   description = "LangChain agent powered by OpenAI and tools";
   type=PluginType.Agent;
-  configExample: AgentOpenAIInitConfig = {
+  RunConfigExample:AgentOpenAIRunArgs={
+    input: ""
+  }
+  InitConfigExample: AgentOpenAIInitConfig = {
     apiKey: "sk-xxx",
     model: "gpt-4o",
     temperature: 0.7,
@@ -31,7 +34,8 @@ export default class AgentOpenAIPlugin
       name:this.name,
       description:this.description,
       type:this.type,
-      configExample:this.configExample,
+      InitConfigExample:this.InitConfigExample,
+      RunConfigExample:this.RunConfigExample,
       executor: this.executor
     }
   }

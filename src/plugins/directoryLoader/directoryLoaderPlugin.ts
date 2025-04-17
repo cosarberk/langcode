@@ -12,8 +12,10 @@ export default class DirectoryLoaderPlugin
   name = "directoryLoader";
   description = "Loads all supported documents in a directory.";
   type = PluginType.Loader;
+  RunConfigExample:DirectoryLoaderRunArgs={
 
-  configExample: DirectoryLoaderInitConfig = {
+  }
+  InitConfigExample: DirectoryLoaderInitConfig = {
     directoryPath: "./veriler/",
   };
 
@@ -24,7 +26,8 @@ export default class DirectoryLoaderPlugin
       name: this.name,
       description: this.description,
       type: this.type,
-      configExample: this.configExample,
+      InitConfigExample: this.InitConfigExample,
+      RunConfigExample:this.RunConfigExample,
       loader: this.loader,
     };
   }

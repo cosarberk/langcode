@@ -11,8 +11,11 @@ export default class DallePlugin implements Plugin<DalleInitConfig, DalleRunArgs
   description = "OpenAI DALL·E API ile görsel üretir.";
 type=PluginType.Tool;
   private dalle: DalleExpose["dalle"] | null = null;
-
-  configExample:DalleInitConfig = {
+  RunConfigExample:DalleRunArgs={
+    prompt: "",
+    outputPath: ""
+  }
+  InitConfigExample:DalleInitConfig = {
     openAIApiKey: "sk-...",
     modelName: "dall-e-3",
     size: "1024x1024",
@@ -24,7 +27,8 @@ type=PluginType.Tool;
       name:this.name,
       description:this.description,
       type:this.type,
-      configExample:this.configExample,
+      InitConfigExample:this.InitConfigExample,
+      RunConfigExample:this.RunConfigExample,
       dalle:this.dalle
     } 
   }

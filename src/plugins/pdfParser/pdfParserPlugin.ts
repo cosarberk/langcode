@@ -11,8 +11,13 @@ export default class PdfParserPlugin
   name = "pdfParser";
   description = "PDF dosyalarını (yerel veya uzak) metin ve metadata olarak parse eden plugin.";
   type = PluginType.LangCodeTool;
-
-  configExample: PdfParserInitConfig = {
+  RunConfigExample:PdfParserRunArgs={
+    filePath:"",
+    fileUrl:"",
+    parseMetaOnly:false,
+    returnBuffer:false
+  }
+  InitConfigExample: PdfParserInitConfig = {
     parseMetaOnly: false, 
   };
 
@@ -23,8 +28,10 @@ export default class PdfParserPlugin
       name: this.name,
       description: this.description,
       type: this.type,
-      configExample: this.configExample,
+      InitConfigExample: this.InitConfigExample,
       parseMetaOnly: this.parseMetaOnly,
+      RunConfigExample:this.RunConfigExample,
+
     };
   }
 

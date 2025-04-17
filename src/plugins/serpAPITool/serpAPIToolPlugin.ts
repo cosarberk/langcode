@@ -9,9 +9,11 @@ export default class SerpAPIToolPlugin
   name = "serpAPITool";
   description = "Use SerpAPI to fetch search results from Google.";
   type = PluginType.Tool;
+  RunConfigExample:SerpAPIToolRunArgs={
+    query: ""
+  }
 
-
-  configExample: SerpAPIToolInitConfig = {
+  InitConfigExample: SerpAPIToolInitConfig = {
     apiKey: "serpapi-api-key",
     params: {
       q: "langchain nedir",
@@ -27,7 +29,8 @@ export default class SerpAPIToolPlugin
       name: this.name,
       description: this.description,
       type: this.type,
-      configExample: this.configExample,
+      InitConfigExample: this.InitConfigExample,
+      RunConfigExample:this.RunConfigExample,
       tool: this.tool,
     };
   }

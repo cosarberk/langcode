@@ -7,8 +7,10 @@ export default class CalculatorToolPlugin
   name = "calculatorTool";
   description = "Evaluate math expressions using a built-in calculator.";
   type = PluginType.Tool;
-
-  configExample: CalculatorToolInitConfig = {};
+  RunConfigExample:CalculatorToolRunArgs={
+    input: ""
+  }
+  InitConfigExample: CalculatorToolInitConfig = {};
 
   private tool: CalculatorToolExpose["tool"]= null;
 
@@ -17,7 +19,8 @@ export default class CalculatorToolPlugin
       name: this.name,
       description: this.description,
       type: this.type,
-      configExample: this.configExample,
+      InitConfigExample: this.InitConfigExample,
+      RunConfigExample:this.RunConfigExample,
       tool: this.tool,
     };
   }

@@ -8,8 +8,13 @@ export default class CheerioScraperPlugin
   name = "cheerioScraper";
   description = "Cheerio ile HTML parse edip sayfa içeriğini ayrıştırma plugin'i.";
   type = PluginType.Tool;
-
-  configExample: CheerioScraperInitConfig = {
+  RunConfigExample:CheerioScraperRunArgs={
+    url: "",
+    selector:"",   
+    attribute: "", 
+    returnHtml:false 
+  }
+  InitConfigExample: CheerioScraperInitConfig = {
     userAgent: "Mozilla/5.0 (compatible; CheerioBot/1.0)",
   };
 
@@ -20,7 +25,8 @@ export default class CheerioScraperPlugin
       name: this.name,
       description: this.description,
       type: this.type,
-      configExample: this.configExample,
+      InitConfigExample: this.InitConfigExample,
+      RunConfigExample:this.RunConfigExample,
       userAgent: this.userAgent,
     };
   }

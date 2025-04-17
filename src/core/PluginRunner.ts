@@ -41,7 +41,7 @@ export class PluginRunner extends EventEmitter {
     const itema = {...item,timestamp: new Date().toISOString()}
     if (this.histories.length >= this.historyLimit) this.histories.shift();
     this.histories.push(itema);
-    this.logger.info(`🔌 history added: ${JSON.stringify(itema,null,2)}`);
+  //  this.logger[item.level](`🔌 history added: ${JSON.stringify(itema,null,2)}`);
   }
 
   public history() {
@@ -85,7 +85,7 @@ export class PluginRunner extends EventEmitter {
           data:err
         });
         if (this.strict) {
-          throw err;
+          throw {error:err,history:this.histories};
         }
       }
     }
@@ -105,7 +105,8 @@ export class PluginRunner extends EventEmitter {
         message:`Plugin '${pluginName}' aktif değil.`
       });
       if (this.strict) {
-        throw new Error(`Plugin '${pluginName}' aktif değil.`);
+        throw {error:`Plugin '${pluginName}' aktif değil.`,history:this.histories};
+      
       }
     }
 
@@ -149,7 +150,7 @@ export class PluginRunner extends EventEmitter {
         message: `Plugin '${pluginName}' aktif değil.`
       });
       if (this.strict) {
-        throw new Error(`Plugin '${pluginName}' aktif değil.`);
+        throw {error:`Plugin '${pluginName}' aktif değil.`,history:this.histories};
       }
     }
     if (typeof plugin?.expose === "function") {
@@ -172,7 +173,7 @@ export class PluginRunner extends EventEmitter {
     });
 
     if (this.strict) {
-      throw new Error(`Plugin '${pluginName}' expose() sağlamıyor.`);
+      throw {error:`Plugin '${pluginName}' expose() sağlamıyor.`,history:this.histories};
     }
   }
 }

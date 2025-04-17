@@ -31,7 +31,8 @@ import "../global";
 export interface Plugin<InitConfig = Record<string, any>,RunArgs = Record<string, any>,Expose = Record<string, any>,RunReturn = any> {
   name: string;
   description: string;
-  configExample?: Record<string, any> | {};
+  InitConfigExample?: Record<string, any> | {};
+  RunConfigExample?: Record<string, any> | {};
   type: PluginType;
   init(config: InitConfig): Promise<void>;
   run(args: RunArgs): Promise<RunReturn>;
@@ -43,7 +44,8 @@ export interface Plugin<InitConfig = Record<string, any>,RunArgs = Record<string
 export interface PluginDescriptions {
   name: string;
   description: string;
-  configExample: Record<string, any>;
+  InitConfigExample: Record<string, any>;
+  RunConfigExample: Record<string, any>;
   type: PluginType;
 }
 

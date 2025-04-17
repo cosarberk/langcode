@@ -9,7 +9,17 @@ export default class MailerPlugin
   name = "mailer";
   description = "SMTP email sender using nodemailer.";
   type=PluginType.LangCodeTool
-  configExample:MailerInitConfig = {
+  RunConfigExample:MailerRunArgs={
+    to: "",
+    subject: "",
+    text: "",
+    html: "",
+    attachments:[ {
+      filename: "",
+      path: ""
+    }]
+  }
+  InitConfigExample:MailerInitConfig = {
     host: "mail.domain.com",
     port: 587,
     secure: false,
@@ -26,7 +36,8 @@ export default class MailerPlugin
       name:this.name,
       description:this.description,
       type:this.type,
-      configExample:this.configExample,
+      InitConfigExample:this.InitConfigExample,
+      RunConfigExample:this.RunConfigExample,
       transporter:this.transporter,
       fromEmail:this.fromEmail
     }

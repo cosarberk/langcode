@@ -9,7 +9,10 @@ export default class OpenAIEmbeddingPlugin
   name = "openaiEmbedding";
   description = "Get embeddings from OpenAI for a given text.";
   type=PluginType.Embedding;
-  configExample: OpenAIEmbeddingInitConfig = {
+  RunConfigExample:OpenAIEmbeddingRunArgs={
+    text: ""
+  }
+  InitConfigExample: OpenAIEmbeddingInitConfig = {
     apiKey: "sk-...",
     model: "text-embedding-3-small",
   };
@@ -21,7 +24,8 @@ export default class OpenAIEmbeddingPlugin
       name:this.name,
       description:this.description,
       type:this.type,
-      configExample:this.configExample,
+      InitConfigExample:this.InitConfigExample,
+      RunConfigExample:this.RunConfigExample,
       embeddingModel:this.embeddingModel
     }
   }

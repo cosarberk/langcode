@@ -1,6 +1,6 @@
 import { langcode, Langcode } from "../core";
 import { EmbeddingProviders, OpenAIEmbeddingExpose, PluginConfigs, plugins, VectorStores } from "../types";
-import { getPlugins, printPlugins } from "../utils";
+import { getPlugin, getPlugins, printPlugins } from "../utils";
 import chalk from "chalk";
 import { Calculator } from "@langchain/community/tools/calculator";
 import { Document } from "@langchain/core/documents";
@@ -11,6 +11,7 @@ const key ="sk-proj-"
 async function main() {
 
   //const Allplugins = await printPlugins();
+  console.log(await getPlugin(plugins.dalle))
   const config:PluginConfigs[] = [
     {
       pluginName: plugins.openai,
@@ -124,7 +125,7 @@ async function main() {
   // });
 
   const manager = await langcode(config, {
-    debug: false,strict:false
+    debug: true,strict:false
   //  logFile: "./debug/langoce.log"
  });
 // console.log(manager.history())
