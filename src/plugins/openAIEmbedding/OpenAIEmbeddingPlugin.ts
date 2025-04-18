@@ -6,7 +6,7 @@ import { OpenAIEmbeddings } from "@langchain/openai";
 export default class OpenAIEmbeddingPlugin
   implements Plugin<OpenAIEmbeddingInitConfig, OpenAIEmbeddingRunArgs,OpenAIEmbeddingExpose, number[]>
 {
-  name = "openaiEmbedding";
+  name = "openAIEmbedding";
   description = "Get embeddings from OpenAI for a given text.";
   type=PluginType.Embedding;
   RunConfigExample:OpenAIEmbeddingRunArgs={

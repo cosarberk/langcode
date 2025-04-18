@@ -1,14 +1,14 @@
 import {EmbeddingProviders,VectorStores, OpenAIVectorSearchExpose, OpenAIVectorSearchInitConfig, OpenAIVectorSearchRunArgs, Plugin, PluginType } from "../../types";
 import { Document } from "@langchain/core/documents";
 import {  retrieverBuilder } from "../../base";
-import VectorSearchPlugin from "../VectorSearch/VectorSearchPlugin";
+import VectorSearchPlugin from "../vectorSearch/vectorSearchPlugin";
 
 
 
 export default class OpenAIVectorSearchPlugin
   implements Plugin<OpenAIVectorSearchInitConfig, OpenAIVectorSearchRunArgs,OpenAIVectorSearchExpose, Document[]>
 {
-  name = "openaivectorsearch";
+  name = "openAIVectorSearch";
   description = "Query a FAISS vector index using OpenAI embeddings.";
   type=PluginType.VectorSearch;
   RunConfigExample:OpenAIVectorSearchRunArgs={

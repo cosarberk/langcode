@@ -2,7 +2,7 @@ import { ChatOpenAI } from "@langchain/openai";
 import { PluginDescriptions } from "./plugin";
 
 
-export type OpenAiInitConfig = {
+export type OpenAIInitConfig = {
   apiKey: string;
   modelName?: string;
   temperature?: number;
@@ -11,16 +11,16 @@ export type OpenAiInitConfig = {
 
 
 
-export type OpenAiRunArgs = {
+export type OpenAIRunArgs = {
     prompt: string;
   };
 
-  export interface OpenAiExpose extends PluginDescriptions{
+  export interface OpenAIExpose extends PluginDescriptions{
    llm: ChatOpenAI | null
   }
   
-  export const OpenAiPluginTypes = {
-    runArgs: {} as OpenAiRunArgs,
+  export const OpenAIPluginTypes = {
+    runArgs: {} as OpenAIRunArgs,
     return: "" as string,
-    expose:{} as OpenAiExpose
+    expose:{} as OpenAIExpose
   };

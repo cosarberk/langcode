@@ -1,22 +1,22 @@
 import { ChatOpenAI } from "@langchain/openai";
 import { HumanMessage } from "@langchain/core/messages";
-import { OpenAiExpose, OpenAiInitConfig, OpenAiRunArgs,Plugin, PluginType } from "../../types";
+import { OpenAIExpose, OpenAIInitConfig, OpenAIRunArgs,Plugin, PluginType } from "../../types";
 
-export default class OpenAIPlugin implements Plugin<OpenAiInitConfig, OpenAiRunArgs ,OpenAiExpose,String> {
+export default class OpenAIPlugin implements Plugin<OpenAIInitConfig, OpenAIRunArgs ,OpenAIExpose,String> {
   name = "openai";
   description = "OpenAI GPT modellerini kullanır.";
   type=PluginType.LLM;
-  private llm:OpenAiExpose["llm"] = null;
-  RunConfigExample:OpenAiRunArgs={
+  private llm:OpenAIExpose["llm"] = null;
+  RunConfigExample:OpenAIRunArgs={
     prompt: ""
   }
-  InitConfigExample:OpenAiInitConfig = {
+  InitConfigExample:OpenAIInitConfig = {
     apiKey: "sk-...",
     modelName: "gpt-4o",
     temperature: 0
   };
 
-  expose():OpenAiExpose {
+  expose():OpenAIExpose {
     return {
       name:this.name,
       description:this.description,
@@ -27,7 +27,7 @@ export default class OpenAIPlugin implements Plugin<OpenAiInitConfig, OpenAiRunA
     }
   }
 
-  async init(config:OpenAiInitConfig) {
+  async init(config:OpenAIInitConfig) {
     const { apiKey, modelName = "gpt-4o", temperature = 0 } = config;
 
     this.llm = new ChatOpenAI({
@@ -44,7 +44,7 @@ export default class OpenAIPlugin implements Plugin<OpenAiInitConfig, OpenAiRunA
     }
   }
 
-  async run(args:OpenAiRunArgs):Promise<any> {
+  async run(args:OpenAIRunArgs):Promise<any> {
     if (!this.llm) {
       throw new Error("Plugin başlatılmadı. Lütfen önce init() metodunu çağırın.");
     }

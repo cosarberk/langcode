@@ -8,7 +8,7 @@ export async function getPlugins(): Promise<PluginDescriptions[]> {
 
   for (const pluginName of Object.values(plugins)) {
     try {
-      const pluginModule = await import(`../plugins/${pluginName}/${capitalize(pluginName)}Plugin`);
+      const pluginModule = await import(`../plugins/${pluginName}/${pluginName}Plugin`);
       const pluginInstance: Plugin = new pluginModule.default();
       const InitConfigExample = pluginInstance.InitConfigExample || {};
       const RunConfigExample = pluginInstance.RunConfigExample || {};
@@ -30,7 +30,7 @@ export async function getPlugins(): Promise<PluginDescriptions[]> {
 
 export async function getPlugin(pluginName: plugins): Promise<PluginDescriptions | null> {
   try {
-    const pluginModule = await import(`../plugins/${pluginName}/${capitalize(pluginName)}Plugin`);
+    const pluginModule = await import(`../plugins/${pluginName}/${pluginName}Plugin`);
     const pluginInstance: Plugin = new pluginModule.default();
     const InitConfigExample = pluginInstance.InitConfigExample || {};
     const RunConfigExample = pluginInstance.RunConfigExample || {};

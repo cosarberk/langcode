@@ -17,16 +17,16 @@ import { PdfLoaderPluginTypes } from "./pdfLoaderPlugin";
 import { TextLoaderPluginTypes } from "./textLoaderPlugin";
 import { BufferMemoryPluginTypes } from "./bufferMemoryPlugin";
 import { plugins, PluginType } from "../enums";
-import { AgentOpenAIPluginTypes } from "./AgentOpenAIPlugin";
-import { DallePluginTypes } from "./DallePlugin";
-import { HttpPluginTypes } from "./HttpPlugin";
-import { MailerPluginTypes } from "./MailerPlugin";
-import { OpenAIEmbeddingPluginTypes } from "./OpenAIEmbeddingPlugin";
-import { OpenAiPluginTypes } from "./OpenaiPlugin";
-import { OpenAIVectorSearchPluginTypes } from "./OpenAIVectorSearchPlugin";
-import { PromptTemplatePluginTypes } from "./PromptTemplatePlugin";
-import { StructuredOutputParserPluginTypes } from "./StructuredOutputParserPlugin";
-import { VectorSearchPluginTypes } from "./VectorSearchPlugin";
+import { AgentOpenAIPluginTypes } from "./agentOpenAIPlugin";
+import { DallePluginTypes } from "./dallePlugin";
+import { HttpPluginTypes } from "./httpPlugin";
+import { MailerPluginTypes } from "./mailerPlugin";
+import { OpenAIEmbeddingPluginTypes } from "./openAIEmbeddingPlugin";
+import { OpenAIPluginTypes } from "./openAIPlugin";
+import { OpenAIVectorSearchPluginTypes } from "./openAIVectorSearchPlugin";
+import { PromptTemplatePluginTypes } from "./promptTemplatePlugin";
+import { StructuredOutputParserPluginTypes } from "./structuredOutputParserPlugin";
+import { VectorSearchPluginTypes } from "./vectorSearchPlugin";
 import "../global";
 export interface Plugin<InitConfig = Record<string, any>,RunArgs = Record<string, any>,Expose = Record<string, any>,RunReturn = any> {
   name: string;
@@ -56,13 +56,13 @@ export interface PluginConfigs {
 
 export interface PluginTypeMap {
   dalle: typeof DallePluginTypes;
-  openai: typeof OpenAiPluginTypes;
+  openai: typeof OpenAIPluginTypes;
   http: typeof HttpPluginTypes
   mailer: typeof MailerPluginTypes
   promptTemplate :typeof PromptTemplatePluginTypes
   agentOpenAI: typeof AgentOpenAIPluginTypes
-  openaiEmbedding:typeof OpenAIEmbeddingPluginTypes
-  openaiVectorSearch:typeof OpenAIVectorSearchPluginTypes
+  openAIEmbedding:typeof OpenAIEmbeddingPluginTypes
+  openAIVectorSearch:typeof OpenAIVectorSearchPluginTypes
   vectorSearch:typeof VectorSearchPluginTypes
   structuredOutputParser:typeof StructuredOutputParserPluginTypes
   bufferMemory: typeof BufferMemoryPluginTypes;
